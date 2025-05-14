@@ -45,28 +45,34 @@ jobs:
       run: which poetry && poetry --version
 
     - name: Install dependencies
+      shell: bash
       run: |
         poetry install --no-interaction
 
     - name: Format check with Black
+      shell: bash
       run: |
         poetry run black --check .
 
     - name: Import sorting check with isort
+      shell: bash
       run: |
         poetry run isort --check-only --profile black .
 
     - name: Lint with flake8
+      shell: bash
       run: |
         poetry run flake8 ioctx tests
 
     - name: Type check with mypy
       run: |
         poetry run mypy ioctx
+        shell: bash
 
     - name: Test with pytest
       run: |
         poetry run pytest
+        shell: bash
 
     - name: Upload coverage report
       uses: codecov/codecov-action@v3
